@@ -2,15 +2,13 @@
 //This function uses a pivot picker method to choose the median value out of 3 possible values to reduce runtime
 
 //calling wrapper sort function to return sorted array
-function quickSort(array)
-{
+function quickSort(array){
     qSort(array);
     return array;
 }
 
 //Quick sort function 
-function qSort(array, start, end)
-{
+function qSort(array, start, end){
     var newPI = partition(array, start, end);
     if ( end - start == 1) {return;}
     qSort(array, 0, newPI);
@@ -18,33 +16,27 @@ function qSort(array, start, end)
 }
 
 //The partition function is where the pivot is picked and the values are thrown on the right or left
-function partition(arr, start, end)
-{
+function partition(arr, start, end){
     start = start || 0;
     end = end || arr.length;
     var pI = pickPivot(arr, start, end-1);
     var pivot = arr[pI];
     arr[pI] = arr[start];
     var lastLowI = start;
-
-    for(var i = start + 1; i < end; i++)
-    {
-        if(arr[i] < pivot)
-        {
+    for(var i = start + 1; i < end; i++)    {
+        if(arr[i] < pivot){
             var temp = arr[i];
             arr[i] = arr[++lastLowI];
             arr[lastLowI] = temp;
         }
     }
-
     arr[start] = arr[lastLowI];
     arr[lastLowI] = pivot;
     return lastLowI;
 }
 
 //pivot picker function to get the median value between the start, end, and middle values
-function pickPivot(arr, start, end)
-{
+function pickPivot(arr, start, end){
     var a = arr[start];
     var c = arr[end];
     var bI = Math.floor((start+end))/2;
